@@ -912,6 +912,10 @@
 <!-- eslint-disable-next-line vue/component-tags-order -->
 <script>
 import moment from 'moment';
+import {
+  toDate, endOfDay, sub, differenceInDays,
+}
+from 'date-fns';
 import { v4 as uuid } from 'uuid';
 import isEmpty from 'lodash/isEmpty';
 import { mapState, mapGetters, mapActions } from '@/libs/store';
@@ -1130,13 +1134,15 @@ export default {
       this.scoreChecklistItem({ taskId: this.task._id, itemId: item.id });
     },
     calculateTimeTillDue () {
-      const endOfToday = moment().subtract(this.user.preferences.dayStart, 'hours').endOf('day');
-      const endOfDueDate = moment(this.task.date).endOf('day');
-
-      return moment.duration(endOfDueDate.diff(endOfToday));
+      const dueDateEnd = endOfDay(toDate(this.task.date));
+      const now = new Date();
+      const userDate = sub(now, { hours: this.user.preferences.dayStart });
+      const todayEnd = endOfDay(userDate);
+      const difference = differenceInDays(dueDateEnd, todayEnd);
+      return difference;
     },
     checkIfOverdue () {
-      return this.calculateTimeTillDue().asDays() < 0;
+      return this.calculateTimeTillDue() < 0;
     },
     formatDueDate () {
       if (moment().isSame(this.task.date, 'day')) {
