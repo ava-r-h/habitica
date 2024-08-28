@@ -1136,6 +1136,7 @@ export default {
       return moment.duration(endOfDueDate.diff(endOfToday));
     },
     checkIfOverdue () {
+      console.log('Katson onko päivä');
       return this.calculateTimeTillDue().asDays() < 0;
     },
     formatDueDate () {
