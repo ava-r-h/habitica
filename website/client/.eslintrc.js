@@ -18,6 +18,7 @@ module.exports = {
     'prefer-regex-literals': 'warn',
     'vue/no-v-html': 'off',
     'vue/no-mutating-props': 'warn',
+    'space-before-function-paren': 'off',
     // this creates issues with the current way we have to push the process.env vars to webpack
     // https://github.com/eslint/eslint/issues/14918
     // https://github.com/webpack/webpack/issues/5392

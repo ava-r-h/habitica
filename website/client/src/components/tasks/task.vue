@@ -912,6 +912,7 @@
 <!-- eslint-disable-next-line vue/component-tags-order -->
 <script>
 import moment from 'moment';
+import { DateTime } from 'luxon';
 import { v4 as uuid } from 'uuid';
 import isEmpty from 'lodash/isEmpty';
 import { mapState, mapGetters, mapActions } from '@/libs/store';
@@ -1130,19 +1131,18 @@ export default {
       this.scoreChecklistItem({ taskId: this.task._id, itemId: item.id });
     },
     calculateTimeTillDue () {
-      const endOfToday = moment().subtract(this.user.preferences.dayStart, 'hours').endOf('day');
-      const endOfDueDate = moment(this.task.date).endOf('day');
-
-      return moment.duration(endOfDueDate.diff(endOfToday));
+      const endOfToday = DateTime.now().minus({ hours: this.user.preferences.dayStart }).endOf('day');
+      const endOfDueDate = DateTime.fromObject(this.task.date).endOf('day');
+      return endOfDueDate.diff(endOfToday);
     },
     checkIfOverdue () {
       return this.calculateTimeTillDue().asDays() < 0;
     },
     formatDueDate () {
-      if (moment().isSame(this.task.date, 'day')) {
+      if (DateTime.now().hasSame(this.task.date, 'day')) {
         return this.$t('today');
       }
-      return moment(this.task.date).format(this.user.preferences.dateFormat.toUpperCase());
+      return DateTime.fromObject(this.task.date).toFormat(this.user.preferences.dateFormat.toUpperCase());
     },
     edit (e, task) {
       if (this.isRunningYesterdailies) return;

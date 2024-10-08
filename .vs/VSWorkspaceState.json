@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\website",
+    "\\website\\client",
+    "\\website\\client\\src",
+    "\\website\\client\\src\\components",
+    "\\website\\client\\src\\components\\tasks"
+  ],
+  "SelectedNode": "\\website\\client\\src\\components\\groupLink.vue",
+  "PreviewInSolutionExplorer": false
+}
