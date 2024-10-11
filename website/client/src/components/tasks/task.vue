@@ -1132,13 +1132,12 @@ export default {
     calculateTimeTillDue () {
       const endOfToday = moment().subtract(this.user.preferences.dayStart, 'hours').endOf('day');
       const endOfDueDate = moment(this.task.date).endOf('day');
-
       return moment.duration(endOfDueDate.diff(endOfToday));
     },
-    checkIfOverdue () {
+    checkIfOverdue() {
       return this.calculateTimeTillDue().asDays() < 0;
     },
-    formatDueDate () {
+    formatDueDate() {
       if (moment().isSame(this.task.date, 'day')) {
         return this.$t('today');
       }
