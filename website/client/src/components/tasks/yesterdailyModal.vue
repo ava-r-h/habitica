@@ -81,7 +81,7 @@
 </style>
 
 <script>
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { mapState } from '@/libs/store';
 import externalLinks from '@/mixins/externalLinks';
 import scoreTask from '@/mixins/scoreTask';
@@ -106,7 +106,7 @@ export default {
   data () {
     return {
       isLoading: false,
-      dueDate: moment().subtract(1, 'days'),
+      dueDate: dayjs().subtract(1, 'days'),
     };
   },
   updated () {
@@ -117,7 +117,7 @@ export default {
   computed: {
     ...mapState({ user: 'user.data' }),
     tasksByType () {
-      this.dueDate = moment().subtract(1, 'days'); // eslint-disable-line vue/no-side-effects-in-computed-properties
+      this.dueDate = dayjs().subtract(1, 'days'); // eslint-disable-line vue/no-side-effects-in-computed-properties
 
       return {
         daily: this.yesterDailies,

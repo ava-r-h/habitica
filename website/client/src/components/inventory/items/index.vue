@@ -337,7 +337,7 @@
 <script>
 import each from 'lodash/each';
 import throttle from 'lodash/throttle';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import Item from '@/components/inventory/item';
 import ItemRows from '@/components/ui/itemRows';
 import CountBadge from '@/components/ui/countBadge';
@@ -474,7 +474,7 @@ export default {
 
       specialArray.push({
         key: 'mysteryItem',
-        class: `inventory_present inventory_present_${moment().format('MM')}`,
+        class: `inventory_present inventory_present_${dayjs().format('MM')}`,
         text: this.$t('subscriberItemText'),
         quantity: this.user.purchased.plan.mysteryItems.length,
       });

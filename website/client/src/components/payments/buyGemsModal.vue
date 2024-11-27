@@ -385,7 +385,7 @@
 
 <script>
 import find from 'lodash/find';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { mapState } from '@/libs/store';
 import markdown from '@/directives/markdown';
 import paymentsMixin from '@/mixins/payments';
@@ -444,20 +444,20 @@ export default {
       return '';
     },
     eventStartMonth () {
-      return moment(this.currentEvent.start).format('MMMM');
+      return dayjs(this.currentEvent.start).format('MMMM');
     },
     eventStartOrdinal () {
-      return moment(this.currentEvent.start).format('Do');
+      return dayjs(this.currentEvent.start).format('Do');
     },
     eventEndMonth () {
-      return moment(this.currentEvent.end).format('MMMM');
+      return dayjs(this.currentEvent.end).format('MMMM');
     },
     eventEndOrdinal () {
-      return moment(this.currentEvent.end).format('Do');
+      return dayjs(this.currentEvent.end).format('Do');
     },
     isGemsPromoActive () {
       const currEvt = this.currentEvent;
-      if (currEvt && currEvt.gemsPromo && moment().isBefore(currEvt.end)) {
+      if (currEvt && currEvt.gemsPromo && dayjs().isBefore(currEvt.end)) {
         return true;
       }
 

@@ -177,7 +177,7 @@
 </template>
 
 <script>
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { getPlanContext } from '@/../../common/script/cron';
 import saveHero from '../mixins/saveHero';
 
@@ -206,7 +206,7 @@ export default {
       if (!date) {
         return '--';
       }
-      return moment(date).format('YYYY/MM/DD');
+      return dayjs(date).format('YYYY/MM/DD');
     },
   },
 };

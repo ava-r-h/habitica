@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import moment from 'moment';
+import dayjs from 'dayjs';
 import BaseNotification from './base';
 
 export default {
@@ -28,7 +28,7 @@ export default {
   props: ['notification', 'canRemove'],
   computed: {
     mysteryClass () {
-      return `notif_inventory_present_${moment().format('MM')}`;
+      return `notif_inventory_present_${dayjs().format('MM')}`;
     },
   },
   methods: {

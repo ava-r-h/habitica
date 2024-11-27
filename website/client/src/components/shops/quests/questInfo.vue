@@ -137,7 +137,7 @@ dt {
 </style>
 
 <script>
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import svgStar from '@/assets/svg/difficulty-star.svg';
 import svgStarHalf from '@/assets/svg/difficulty-star-half.svg';
@@ -211,13 +211,13 @@ export default {
     },
     countdownString () {
       if (!this.quest.event || this.purchased) return;
-      const diffDuration = moment.duration(moment(this.quest.event.end).diff(moment()));
+      const diffDuration = dayjs.duration(dayjs(this.quest.event.end).diff(dayjs()));
 
       if (diffDuration.asSeconds() <= 0) {
         this.limitedString = this.$t('noLongerAvailable');
       } else if (diffDuration.days() > 0 || diffDuration.months() > 0) {
         this.limitedString = this.$t('limitedAvailabilityDays', {
-          days: moment(this.quest.event.end).diff(moment(), 'days'),
+          days: dayjs(this.quest.event.end).diff(dayjs(), 'days'),
           hours: diffDuration.hours(),
           minutes: diffDuration.minutes(),
         });

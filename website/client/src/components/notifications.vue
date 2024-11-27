@@ -101,7 +101,7 @@
 
 <script>
 import axios from 'axios';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import throttle from 'lodash/throttle';
 import debounce from 'lodash/debounce';
 import Vue from 'vue';
@@ -583,10 +583,10 @@ export default {
 
       // Open yesterdailies modal the next time cron runs
       const { dayStart } = this.user.preferences;
-      let nextCron = moment().hours(dayStart).minutes(0).seconds(0)
-        .milliseconds(0);
+      let nextCron = dayjs().hour(dayStart).minute(0).second(0)
+        .millisecond(0);
 
-      const currentHour = moment().format('H');
+      const currentHour = dayjs().format('H');
       if (currentHour >= dayStart) {
         nextCron = nextCron.add(1, 'day');
       }
@@ -605,7 +605,7 @@ export default {
 
       const { dailys } = this.$store.state.tasks.data;
 
-      const yesterDay = moment().subtract('1', 'day').startOf('day').add({
+      const yesterDay = dayjs().subtract('1', 'day').startOf('day').add({
         hours: this.user.preferences.dayStart,
       });
 
@@ -795,7 +795,7 @@ export default {
             // If the user cronned in the last 3 minutes
             // Don't show too many modals on app load
             // Use notification panel
-            if (moment().diff(this.user.lastCron, 'minutes') < 3) {
+            if (dayjs().diff(this.user.lastCron, 'minutes') < 3) {
               markAsRead = false;
             } else {
               // Otherwise use the modal

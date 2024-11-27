@@ -912,6 +912,8 @@
 <!-- eslint-disable-next-line vue/component-tags-order -->
 <script>
 import moment from 'moment';
+import dayjs from 'dayjs'
+import duration from 'dayjs/plugin/duration'
 import { v4 as uuid } from 'uuid';
 import isEmpty from 'lodash/isEmpty';
 import { mapState, mapGetters, mapActions } from '@/libs/store';
@@ -937,7 +939,7 @@ import scoreTask from '@/mixins/scoreTask';
 import sync from '@/mixins/sync';
 import approvalFooter from './approvalFooter';
 import MenuDropdown from '../ui/customMenuDropdown';
-
+dayjs.extend(duration);
 export default {
   components: {
     approvalFooter,
@@ -1130,19 +1132,19 @@ export default {
       this.scoreChecklistItem({ taskId: this.task._id, itemId: item.id });
     },
     calculateTimeTillDue () {
-      const endOfToday = moment().subtract(this.user.preferences.dayStart, 'hours').endOf('day');
-      const endOfDueDate = moment(this.task.date).endOf('day');
+      const endOfToday = dayjs().subtract(this.user.preferences.dayStart, 'hours').endOf('day');
+      const endOfDueDate = dayjs(this.task.date).endOf('day');
 
-      return moment.duration(endOfDueDate.diff(endOfToday));
+      return dayjs.duration(endOfDueDate.diff(endOfToday));
     },
     checkIfOverdue () {
       return this.calculateTimeTillDue().asDays() < 0;
     },
     formatDueDate () {
-      if (moment().isSame(this.task.date, 'day')) {
+      if (dayjs().isSame(this.task.date, 'day')) {
         return this.$t('today');
       }
-      return moment(this.task.date).format(this.user.preferences.dateFormat.toUpperCase());
+      return dayjs(this.task.date).format(this.user.preferences.dateFormat.toUpperCase());
     },
     edit (e, task) {
       if (this.isRunningYesterdailies) return;

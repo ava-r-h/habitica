@@ -296,7 +296,7 @@ h2 {
 import debounce from 'lodash/debounce';
 import find from 'lodash/find';
 import isUUID from 'validator/lib/isUUID';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { mapState } from '@/libs/store';
 import closeIcon from '@/assets/svg/close.svg';
 import bigGiftIcon from '@/assets/svg/big-gift.svg';
@@ -333,27 +333,27 @@ export default {
     },
     promoStartMonth () {
       if (!this.currentEvent) return null;
-      return moment(this.currentEvent.start).format('MMMM');
+      return dayjs(this.currentEvent.start).format('MMMM');
     },
     promoStartOrdinal () {
       if (!this.currentEvent) return null;
-      return moment(this.currentEvent.start).format('Do');
+      return dayjs(this.currentEvent.start).format('Do');
     },
     promoStartTime () {
       if (!this.currentEvent) return null;
-      return moment(this.currentEvent.start).format('hh:mm A');
+      return dayjs(this.currentEvent.start).format('hh:mm A');
     },
     promoEndMonth () {
       if (!this.currentEvent) return null;
-      return moment(this.currentEvent.end).format('MMMM');
+      return dayjs(this.currentEvent.end).format('MMMM');
     },
     promoEndOrdinal () {
       if (!this.currentEvent) return null;
-      return moment(this.currentEvent.end).format('Do');
+      return dayjs(this.currentEvent.end).format('Do');
     },
     promoEndTime () {
       if (!this.currentEvent) return null;
-      return moment(this.currentEvent.end).format('hh:mm A');
+      return dayjs(this.currentEvent.end).format('hh:mm A');
     },
   },
   watch: {

@@ -210,7 +210,7 @@
 </style>
 
 <script>
-import moment from 'moment';
+import dayjs from 'dayjs';
 import reduce from 'lodash/reduce';
 import { mapState } from '@/libs/store';
 import checkIcon from '@/assets/svg/check.svg';
@@ -257,10 +257,10 @@ export default {
         if (userId !== this.user._id) {
           const { completedDate } = this.task.group.assignedUsersDetail[userId];
           let completedDateString;
-          if (moment().diff(completedDate, 'days') > 0) {
-            completedDateString = `Completed ${moment(completedDate).format('M/D/YY')}`;
+          if (dayjs().diff(completedDate, 'days') > 0) {
+            completedDateString = `Completed ${dayjs(completedDate).format('M/D/YY')}`;
           } else {
-            completedDateString = `Completed at ${moment(completedDate).format('h:mm A')}`;
+            completedDateString = `Completed at ${dayjs(completedDate).format('h:mm A')}`;
           }
           completionsArray.push({
             userId,
@@ -287,15 +287,15 @@ export default {
         if (this.task.group.assignedUsersDetail[userId].completed) { // completed
           const { completedDate } = this.task.group.assignedUsersDetail[userId];
           if (this.userIsAssigned) {
-            if (moment().diff(completedDate, 'days') > 0) {
-              return `<strong>You</strong> completed ${moment(completedDate).format('M/D/YY')}`;
+            if (dayjs().diff(completedDate, 'days') > 0) {
+              return `<strong>You</strong> completed ${dayjs(completedDate).format('M/D/YY')}`;
             }
-            return `<strong>You</strong> completed at ${moment(completedDate).format('h:mm A')}`;
+            return `<strong>You</strong> completed at ${dayjs(completedDate).format('h:mm A')}`;
           }
-          if (moment().diff(completedDate, 'days') > 0) {
-            return `@${userName} completed ${moment(completedDate).format('M/D/YY')}`;
+          if (dayjs().diff(completedDate, 'days') > 0) {
+            return `@${userName} completed ${dayjs(completedDate).format('M/D/YY')}`;
           }
-          return `@${userName} completed at ${moment(completedDate).format('h:mm A')}`;
+          return `@${userName} completed at ${dayjs(completedDate).format('h:mm A')}`;
         }
         if (this.userIsAssigned) {
           return this.$t('youEmphasized');
@@ -311,10 +311,10 @@ export default {
     },
     formattedCompletionTime () {
       if (!this.singleAssignLastDone) return '';
-      if (moment().diff(this.singleAssignLastDone, 'days') < 1) {
-        return moment(this.singleAssignLastDone).format('h:mm A');
+      if (dayjs().diff(this.singleAssignLastDone, 'days') < 1) {
+        return dayjs(this.singleAssignLastDone).format('h:mm A');
       }
-      return moment(this.singleAssignLastDone).format('M/D/YY');
+      return dayjs(this.singleAssignLastDone).format('M/D/YY');
     },
   },
   methods: {

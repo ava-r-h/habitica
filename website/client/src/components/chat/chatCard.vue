@@ -197,7 +197,7 @@
 </style>
 
 <script>
-import moment from 'moment';
+import dayjs from 'dayjs';
 import cloneDeep from 'lodash/cloneDeep';
 import escapeRegExp from 'lodash/escapeRegExp';
 
@@ -216,11 +216,11 @@ export default {
   components: { userLink },
   filters: {
     timeAgo (value) {
-      return moment(value).fromNow();
+      return dayjs(value).fromNow();
     },
     date (value) {
       // @TODO: Vue doesn't support this so we cant user preference
-      return moment(value).toDate().toString();
+      return dayjs(value).toDate().toString();
     },
   },
   mixins: [userStateMixin],
@@ -275,7 +275,7 @@ export default {
       return 'Message hidden (shadow-muted)';
     },
     messageDate () {
-      const date = moment(this.msg.timestamp).toDate();
+      const date = dayjs(this.msg.timestamp).toDate();
       return date.toString();
     },
   },

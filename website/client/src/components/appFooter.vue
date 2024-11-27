@@ -771,7 +771,7 @@ h3 {
 <script>
 // modules
 import axios from 'axios';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 // images
 import melior from '@/assets/svg/melior.svg';
@@ -832,7 +832,7 @@ export default {
     },
     async addMissedDay (numberOfDays) {
       if (!window.confirm(`Are you sure you want to reset the day by ${numberOfDays} day(s)?`)) return; // eslint-disable-line no-alert
-      const date = moment(this.user.lastCron).subtract(numberOfDays, 'days').toDate();
+      const date = dayjs(this.user.lastCron).subtract(numberOfDays, 'days').toDate();
       await axios.post('/api/v4/debug/set-cron', {
         lastCron: date,
       });

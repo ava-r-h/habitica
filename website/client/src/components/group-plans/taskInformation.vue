@@ -182,7 +182,7 @@
 import Vue from 'vue';
 import cloneDeep from 'lodash/cloneDeep';
 import findIndex from 'lodash/findIndex';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import taskDefaults from '@/../../common/script/libs/taskDefaults';
 import TaskColumn from '../tasks/column';
 import TaskModal from '../tasks/taskModal';
@@ -286,7 +286,7 @@ export default {
       if (!this.group || !this.group.cron) return null;
       const { dayStart, timezoneOffset } = this.group.cron;
       const timezoneDiff = this.user.preferences.timezoneOffset - timezoneOffset;
-      return moment()
+      return dayjs()
         .hour(dayStart)
         .minute(0)
         .subtract(timezoneDiff, 'minutes')

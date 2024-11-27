@@ -137,7 +137,7 @@
 
 <script>
 import axios from 'axios';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import externalLinks from '../../mixins/externalLinks';
 
@@ -154,7 +154,7 @@ export default {
   },
   filters: {
     timeAgo (value) {
-      return moment(value).fromNow();
+      return dayjs(value).fromNow();
     },
   },
   mixins: [externalLinks],
@@ -176,7 +176,7 @@ export default {
       return (this.msg.flags && this.msg.flags[this.user.id]) || this.reported;
     },
     messageDate () {
-      const date = moment(this.msg.timestamp).toDate();
+      const date = dayjs(this.msg.timestamp).toDate();
       return date.toString();
     },
   },

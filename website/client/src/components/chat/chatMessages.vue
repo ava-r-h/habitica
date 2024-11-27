@@ -145,7 +145,7 @@
 </style>
 
 <script>
-import moment from 'moment';
+import dayjs from 'dayjs';
 import axios from 'axios';
 import debounce from 'lodash/debounce';
 import findIndex from 'lodash/findIndex';
@@ -173,7 +173,7 @@ export default {
   },
   data () {
     return {
-      currentDayDividerDisplay: moment().day(),
+      currentDayDividerDisplay: dayjs().day(),
       cachedProfileData: {},
       currentProfileLoadedCount: 0,
       currentProfileLoadedEnd: 10,
@@ -279,8 +279,8 @@ export default {
       return (!userStyles && (!cachedProfileData[uuid] || cachedProfileData[uuid].rejected));
     },
     displayDivider (message) {
-      if (this.currentDayDividerDisplay !== moment(message.timestamp).day()) {
-        this.currentDayDividerDisplay = moment(message.timestamp).day();
+      if (this.currentDayDividerDisplay !== dayjs(message.timestamp).day()) {
+        this.currentDayDividerDisplay = dayjs(message.timestamp).day();
         return true;
       }
 

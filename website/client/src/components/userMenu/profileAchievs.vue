@@ -186,7 +186,7 @@
 </style>
 
 <script>
-// import moment from 'moment';
+// import dayjs from 'dayjs';
 // import axios from 'axios';
 // import each from 'lodash/each';
 // import cloneDeep from 'lodash/cloneDeep';

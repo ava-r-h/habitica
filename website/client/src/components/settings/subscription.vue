@@ -618,7 +618,7 @@
 
 <script>
 import axios from 'axios';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import subscriptionBlocks from '@/../../common/script/content/subscriptionBlocks';
 import planGemLimits from '@/../../common/script/libs/planGemLimits';
 import { getPlanContext } from '@/../../common/script/cron';
@@ -767,7 +767,7 @@ export default {
       );
     },
     currentMysterySet () {
-      return `shop_set_mystery_${moment().format('YYYYMM')}`;
+      return `shop_set_mystery_${dayjs().format('YYYYMM')}`;
     },
     paymentMethodLogo () {
       switch (this.user.purchased.plan.paymentMethod) {
@@ -799,7 +799,7 @@ export default {
       }
     },
     subscriptionEndDate () {
-      return moment(this.user.purchased.plan.dateTerminated).format('MM/DD/YYYY');
+      return dayjs(this.user.purchased.plan.dateTerminated).format('MM/DD/YYYY');
     },
     nextHourGlassDate () {
       const currentPlanContext = getPlanContext(this.user, new Date());

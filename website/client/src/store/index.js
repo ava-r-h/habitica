@@ -1,5 +1,5 @@
 import axios from 'axios';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import content from '@/../../common/script/content/index';
 import * as commonConstants from '@/../../common/script/constants';
 import { DAY_MAPPING } from '@/../../common/script/cron';
@@ -18,7 +18,7 @@ const IS_TEST = process.env.NODE_ENV === 'test'; // eslint-disable-line no-proce
 let isUserLoggedIn = false;
 
 // eg, -240 - this will be converted on server as (offset/60)
-const browserTimezoneUtcOffset = moment().utcOffset();
+const browserTimezoneUtcOffset = dayjs().utcOffset();
 
 axios.defaults.headers.common['x-client'] = 'habitica-web';
 

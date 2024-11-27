@@ -212,7 +212,7 @@
 </style>
 
 <script>
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { MAX_SUMMARY_SIZE_FOR_GUILDS } from '@/../../common/script/constants';
 import { mapState } from '@/libs/store';
 import categoryTags from '../categories/categoryTags';
@@ -255,8 +255,8 @@ export default {
   methods: {
     showSuggested (guildId) {
       const habiticaHelpingGuildId = '5481ccf3-5d2d-48a9-a871-70a7380cee5a';
-      const sixtyDaysAgoFromNow = moment().subtract(60, 'days');
-      const isUserNew = moment(this.user.auth.timestamps.created).isAfter(sixtyDaysAgoFromNow);
+      const sixtyDaysAgoFromNow = dayjs().subtract(60, 'days');
+      const isUserNew = dayjs(this.user.auth.timestamps.created).isAfter(sixtyDaysAgoFromNow);
       return guildId === habiticaHelpingGuildId && isUserNew;
     },
     async join () {

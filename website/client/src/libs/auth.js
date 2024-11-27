@@ -1,5 +1,5 @@
 import axios from 'axios';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 export function setUpAxios (AUTH_SETTINGS) { // eslint-disable-line import/prefer-default-export
   if (!AUTH_SETTINGS) {
@@ -8,7 +8,7 @@ export function setUpAxios (AUTH_SETTINGS) { // eslint-disable-line import/prefe
     AUTH_SETTINGS = JSON.parse(AUTH_SETTINGS); // eslint-disable-line no-param-reassign
   }
 
-  const browserTimezoneUtcOffset = moment().utcOffset();
+  const browserTimezoneUtcOffset = dayjs().utcOffset();
 
   if (AUTH_SETTINGS.auth && AUTH_SETTINGS.auth.apiId && AUTH_SETTINGS.auth.apiToken) {
     axios.defaults.headers.common['x-api-user'] = AUTH_SETTINGS.auth.apiId;

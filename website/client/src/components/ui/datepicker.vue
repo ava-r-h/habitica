@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import moment from 'moment';
+import dayjs from 'dayjs';
 import datepicker from 'vuejs-datepicker';
 import calendarIcon from '@/assets/svg/calendar.svg';
 import closeIcon from '@/assets/svg/close.svg';
@@ -72,10 +72,10 @@ export default {
       this.$emit('update:date', after);
     },
     setToday () {
-      this.upDate(moment().toDate());
+      this.upDate(dayjs().toDate());
     },
     setTomorrow () {
-      this.upDate(moment().add(1, 'day').toDate());
+      this.upDate(dayjs().add(1, 'day').toDate());
     },
   },
 };

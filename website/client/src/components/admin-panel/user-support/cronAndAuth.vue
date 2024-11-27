@@ -143,7 +143,7 @@
 </template>
 
 <script>
-import moment from 'moment';
+import dayjs from 'dayjs';
 import formatDate from '../filters/formatDate';
 import saveHero from '../mixins/saveHero';
 
@@ -154,8 +154,8 @@ function resetData (self) {
   self.errorsOrWarningsExist = false;
   self.expand = false;
 
-  const cronDate1 = moment(self.hero.auth.timestamps.loggedin);
-  const cronDate2 = moment(self.hero.lastCron);
+  const cronDate1 = dayjs(self.hero.auth.timestamps.loggedin);
+  const cronDate2 = dayjs(self.hero.lastCron);
   const maxAllowableSecondsDifference = 60; // expect cron to take less than this many seconds
   if (Math.abs(cronDate1.diff(cronDate2, 'seconds')) > maxAllowableSecondsDifference) {
     self.cronError = true;

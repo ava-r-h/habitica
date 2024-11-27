@@ -40,7 +40,7 @@ envVars
 
 const webpackPlugins = [
   new webpack.DefinePlugin(envObject),
-  new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(NOT_EXISTING)$/),
+  new webpack.ContextReplacementPlugin(/dayjs[\\/]locale$/, /^\.\/(NOT_EXISTING)$/),
 ];
 
 module.exports = {

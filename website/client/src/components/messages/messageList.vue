@@ -188,7 +188,7 @@
 </style>
 
 <script>
-import moment from 'moment';
+import dayjs from 'dayjs';
 import debounce from 'lodash/debounce';
 import { mapState } from '@/libs/store';
 
@@ -208,7 +208,7 @@ export default {
   },
   data () {
     return {
-      currentDayDividerDisplay: moment().day(),
+      currentDayDividerDisplay: dayjs().day(),
       loading: false,
       handleScrollBack: false,
       lastOffset: -1,
@@ -255,7 +255,7 @@ export default {
       }
     },
     displayDivider (message) {
-      const day = moment(message.timestamp).day();
+      const day = dayjs(message.timestamp).day();
       if (this.currentDayDividerDisplay !== day) {
         this.currentDayDividerDisplay = day;
         return true;

@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { mapState } from '@/libs/store';
 import paymentsMixin from '@/mixins/payments';
 import { CONSTANTS, getLocalSetting, removeLocalSetting } from '@/libs/userlocalManager';
@@ -93,10 +93,10 @@ export default {
     },
     dateTerminated () {
       if (!this.user.preferences || !this.user.preferences.dateFormat) {
-        return moment(this.group.purchased.plan.dateTerminated);
+        return dayjs(this.group.purchased.plan.dateTerminated);
       }
 
-      return moment(this.group.purchased.plan.dateTerminated)
+      return dayjs(this.group.purchased.plan.dateTerminated)
         .format(this.user.preferences.dateFormat.toUpperCase());
     },
     purchasedGroupPlanPlanExtraMonths () {

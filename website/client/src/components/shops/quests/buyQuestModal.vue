@@ -383,7 +383,7 @@
 </style> -->
 
 <script>
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { mapState } from '@/libs/store';
 
 import svgClock from '@/assets/svg/clock.svg';
@@ -470,7 +470,7 @@ export default {
       return this.icons.gems;
     },
     endDate () {
-      return moment(this.item.event.end);
+      return dayjs(this.item.event.end);
     },
   },
   watch: {

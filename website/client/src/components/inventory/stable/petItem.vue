@@ -111,7 +111,7 @@
 
 <script>
 import some from 'lodash/some';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { v4 as uuid } from 'uuid';
 import { mapState } from '@/libs/store';
 import foolPet from '@/mixins/foolPet';
@@ -171,7 +171,7 @@ export default {
     getPetItemClass () {
       if (this.isOwned() && some(
         this.currentEventList,
-        event => moment().isBetween(event.start, event.end) && event.aprilFools && event.aprilFools === 'Fungi',
+        event => dayjs().isBetween(event.start, event.end) && event.aprilFools && event.aprilFools === 'Fungi',
       )) {
         if (this.isSpecial()) return `Pet ${this.foolPet(this.item.key)}`;
         const petString = `${this.item.eggKey}-${this.item.key}`;

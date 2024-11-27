@@ -343,7 +343,7 @@
 </style>
 
 <script>
-import moment from 'moment';
+import dayjs from 'dayjs';
 import svgGem from '@/assets/svg/gem.svg';
 import svgGemRed from '@/assets/svg/gem-red.svg';
 import svgHourglass from '@/assets/svg/hourglass.svg';
@@ -356,11 +356,11 @@ export default {
   },
   filters: {
     timeAgo (value) {
-      return moment(value).fromNow();
+      return dayjs(value).fromNow();
     },
     date (value) {
       // @TODO: Vue doesn't support this so we cant user preference
-      return moment(value).toDate().toString();
+      return dayjs(value).toDate().toString();
     },
     addedDeducted (amount) {
       if (amount === 0) {

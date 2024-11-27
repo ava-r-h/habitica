@@ -129,7 +129,7 @@
 
 <script>
 import some from 'lodash/some';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { mapState } from '@/libs/store';
 import foolPet from '../mixins/foolPet';
 
@@ -250,7 +250,7 @@ export default {
     petClass () {
       if (some(
         this.currentEventList,
-        event => moment().isBetween(event.start, event.end) && event.aprilFools && event.aprilFools === 'Fungi',
+        event => dayjs().isBetween(event.start, event.end) && event.aprilFools && event.aprilFools === 'Fungi',
       )) {
         return this.foolPet(this.member.items.currentPet);
       }

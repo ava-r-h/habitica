@@ -176,7 +176,7 @@
 
 <script>
 import keys from 'lodash/keys';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import pickBy from 'lodash/pickBy';
 
 import checklist from './modal-controls/checklist';
@@ -222,17 +222,17 @@ export default {
       return usernames;
     },
     summarySentence () {
-      if (this.task.type === 'daily' && moment().isBefore(this.task.startDate)) {
+      if (this.task.type === 'daily' && dayjs().isBefore(this.task.startDate)) {
         return `This is ${this.formattedDifficulty(this.task.priority)} task that will repeat
         ${this.formattedRepeatInterval(this.task.frequency, this.task.everyX)}${this.formattedDays(this.task.frequency, this.task.repeat, this.task.daysOfMonth, this.task.weeksOfMonth, this.task.startDate)}
-        starting on <strong>${moment(this.task.startDate).format('MM/DD/YYYY')}</strong>.`;
+        starting on <strong>${dayjs(this.task.startDate).format('MM/DD/YYYY')}</strong>.`;
       }
       if (this.task.type === 'daily') {
         return `This is ${this.formattedDifficulty(this.task.priority)} task that repeats
         ${this.formattedRepeatInterval(this.task.frequency, this.task.everyX)}${this.formattedDays(this.task.frequency, this.task.repeat, this.task.daysOfMonth, this.task.weeksOfMonth, this.task.startDate)}.`;
       }
       if (this.task.date) {
-        return `This is ${this.formattedDifficulty(this.task.priority)} task that is due <strong>${moment(this.task.date).format('MM/DD/YYYY')}.`;
+        return `This is ${this.formattedDifficulty(this.task.priority)} task that is due <strong>${dayjs(this.task.date).format('MM/DD/YYYY')}.`;
       }
       return `This is ${this.formattedDifficulty(this.task.priority)} task.`;
     },
@@ -253,7 +253,7 @@ export default {
       return this.getTaskClasses(this.task, `edit-modal-${suffix}`);
     },
     formattedDate (date) {
-      return moment(date).format('MM/DD/YYYY');
+      return dayjs(date).format('MM/DD/YYYY');
     },
     formattedDays (frequency, repeat, daysOfMonth, weeksOfMonth, startDate) {
       let activeDays;
@@ -311,7 +311,7 @@ export default {
           }
           break;
         case 'yearly':
-          return ` on <strong>${moment(startDate).format('MMMM Do')}</strong>`;
+          return ` on <strong>${dayjs(startDate).format('MMMM Do')}</strong>`;
         default:
           return '';
       }

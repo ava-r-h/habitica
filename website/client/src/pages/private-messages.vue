@@ -550,7 +550,7 @@
 
 <script>
 import Vue from 'vue';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import groupBy from 'lodash/groupBy';
 import orderBy from 'lodash/orderBy';
 import habiticaMarkdown from 'habitica-markdown';
@@ -584,7 +584,7 @@ export default {
   },
   filters: {
     timeAgo (value) {
-      return moment(new Date(value)).fromNow();
+      return dayjs(new Date(value)).fromNow();
     },
   },
   mixins: [styleHelper],

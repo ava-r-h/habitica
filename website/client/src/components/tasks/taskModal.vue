@@ -1012,7 +1012,7 @@
 
 <script>
 import axios from 'axios';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import Datepicker from '@/components/ui/datepicker';
 import toggleCheckbox from '@/components/ui/toggleCheckbox';
 import markdownDirective from '@/directives/markdown';
@@ -1217,10 +1217,10 @@ export default {
       this.task.down = !this.task.down;
     },
     weekdaysMin (dayNumber) {
-      return moment.weekdaysMin(dayNumber);
+      return dayjs.weekdaysMin(dayNumber);
     },
     formattedDate (date) {
-      return moment(date).format('MM/DD/YYYY');
+      return dayjs(date).format('MM/DD/YYYY');
     },
     calculateMonthlyRepeatDays (newRepeatsOn) {
       if (!this.task) return;
@@ -1229,12 +1229,12 @@ export default {
 
       if (task.frequency === 'monthly') {
         if (repeatsOn === 'dayOfMonth') {
-          const date = moment(task.startDate).date();
+          const date = dayjs(task.startDate).date();
           task.weeksOfMonth = [];
           task.daysOfMonth = [date];
         } else if (repeatsOn === 'dayOfWeek') {
-          const week = Math.ceil(moment(task.startDate).date() / 7) - 1;
-          const dayOfWeek = moment(task.startDate).day();
+          const week = Math.ceil(dayjs(task.startDate).date() / 7) - 1;
+          const dayOfWeek = dayjs(task.startDate).day();
           const shortDay = this.dayMapping[dayOfWeek];
           task.daysOfMonth = [];
           task.weeksOfMonth = [week];

@@ -976,7 +976,7 @@
 
 // eslint-disable-next-line vue/component-tags-order
 <script>
-import moment from 'moment';
+import dayjs from 'dayjs';
 import axios from 'axios';
 import each from 'lodash/each';
 import cloneDeep from 'lodash/cloneDeep';
@@ -1065,11 +1065,11 @@ export default {
       flatGear: 'content.gear.flat',
     }),
     userJoinedDate () {
-      return moment(this.user.auth.timestamps.created)
+      return dayjs(this.user.auth.timestamps.created)
         .format(this.userLoggedIn.preferences.dateFormat.toUpperCase());
     },
     userLastLoggedIn () {
-      return moment(this.user.auth.timestamps.loggedin)
+      return dayjs(this.user.auth.timestamps.loggedin)
         .format(this.userLoggedIn.preferences.dateFormat.toUpperCase());
     },
     equippedItems () {

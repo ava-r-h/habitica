@@ -77,7 +77,7 @@ h1 {
 </style>
 
 <script>
-import moment from 'moment';
+import dayjs from 'dayjs';
 import habiticaMarkdown from 'habitica-markdown';
 import { mapState } from '@/libs/store';
 import seasonalNPC from '@/mixins/seasonalNPC';
@@ -102,7 +102,7 @@ export default {
       this.posts = [];
 
       const lastPublishedPost = postsFromServer
-        .find(p => p.published && moment().isAfter(p.publishDate));
+        .find(p => p.published && dayjs().isAfter(p.publishDate));
 
       if (lastPublishedPost) this.posts.push(lastPublishedPost);
 
@@ -110,7 +110,7 @@ export default {
       if (this.user && this.user.contributor.newsPoster) {
         this.posts.unshift(
           ...postsFromServer
-            .filter(p => !p.published || moment().isBefore(p.publishDate)),
+            .filter(p => !p.published || dayjs().isBefore(p.publishDate)),
         );
       }
     },
@@ -119,7 +119,7 @@ export default {
     },
     getPostDate (post) {
       const format = this.user ? this.user.preferences.dateFormat.toUpperCase() : 'MM/DD/yyyy';
-      return moment(post.publishDate).format(format);
+      return dayjs(post.publishDate).format(format);
     },
   },
 };

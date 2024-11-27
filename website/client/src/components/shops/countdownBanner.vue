@@ -40,14 +40,14 @@
 </style>
 
 <script>
-import moment from 'moment';
+import dayjs from 'dayjs';
 import svgClock from '@/assets/svg/clock.svg';
 import clockWhite from '@/assets/svg/clock-white.svg';
 
 export default {
   props: {
     endDate: {
-      type: Object, // moment
+      type: Object, // dayjs
     },
   },
   data () {
@@ -70,15 +70,15 @@ export default {
   },
   methods: {
     countdownString () {
-      const diffDuration = moment.duration(moment(this.endDate).diff(moment()));
+      const diffDuration = dayjs.duration(dayjs(this.endDate).diff(dayjs()));
 
-      if (moment(this.endDate).isBefore()) {
+      if (dayjs(this.endDate).isBefore()) {
         this.limitedString = this.$t('noLongerAvailable');
         this.availabilityClass = 'expired';
         this.cancelAutoUpdate();
       } else if (diffDuration.days() > 0 || diffDuration.months() > 0) {
         this.limitedString = this.$t('limitedAvailabilityDays', {
-          days: moment(this.endDate).diff(moment(), 'days'),
+          days: dayjs(this.endDate).diff(dayjs(), 'days'),
           hours: diffDuration.hours(),
           minutes: diffDuration.minutes(),
         });

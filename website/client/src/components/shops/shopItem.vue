@@ -255,7 +255,7 @@
 <script>
 import { v4 as uuid } from 'uuid';
 
-import moment from 'moment';
+import dayjs from 'dayjs';
 import svgGem from '@/assets/svg/gem.svg';
 import svgGold from '@/assets/svg/gold.svg';
 import svgHourglasses from '@/assets/svg/hourglass.svg';
@@ -371,13 +371,13 @@ export default {
     },
     countdownString () {
       if (!this.item.event) return;
-      const diffDuration = moment.duration(moment(this.item.event.end).diff(moment()));
+      const diffDuration = dayjs.duration(dayjs(this.item.event.end).diff(dayjs()));
 
       if (diffDuration.asSeconds() <= 0) {
         this.limitedString = this.$t('noLongerAvailable');
       } else if (diffDuration.days() > 0 || diffDuration.months() > 0) {
         this.limitedString = this.$t('limitedAvailabilityDays', {
-          days: moment(this.item.event.end).diff(moment(), 'days'),
+          days: dayjs(this.item.event.end).diff(dayjs(), 'days'),
           hours: diffDuration.hours(),
           minutes: diffDuration.minutes(),
         });

@@ -1,4 +1,4 @@
-import moment from 'moment';
+import dayjs from 'dayjs';
 import axios from 'axios';
 
 import get from 'lodash/get';
@@ -19,12 +19,12 @@ export const avatarEditorUtilies = { // eslint-disable-line import/prefer-defaul
   methods: {
     hideSet (setKey) {
       if (appearanceSets[setKey].availableFrom) {
-        return !moment().isBetween(
+        return !dayjs().isBetween(
           appearanceSets[setKey].availableFrom,
           appearanceSets[setKey].availableUntil,
         );
       }
-      return moment(appearanceSets[setKey].availableUntil).isBefore(moment());
+      return dayjs(appearanceSets[setKey].availableUntil).isBefore(dayjs());
     },
     mapKeysToFreeOption (key, type, subType) {
       const userPreference = subType

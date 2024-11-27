@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import moment from 'moment';
+import dayjs from 'dayjs';
 import userLabel from '../userLabel';
 
 import dots from '@/assets/svg/dots.svg';
@@ -75,7 +75,7 @@ export default {
   },
   filters: {
     timeAgo (value) {
-      return moment(value).fromNow();
+      return dayjs(value).fromNow();
     },
   },
   props: [

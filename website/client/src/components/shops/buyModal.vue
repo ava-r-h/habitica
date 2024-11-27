@@ -597,7 +597,7 @@
 import keys from 'lodash/keys';
 import size from 'lodash/size';
 import reduce from 'lodash/reduce';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import planGemLimits from '@/../../common/script/libs/planGemLimits';
 import { drops as dropEggs } from '@/../../common/script/content/eggs';
@@ -735,13 +735,13 @@ export default {
       return !this.enoughCurrency(this.getPriceClass(), this.item.value * this.selectedAmountToBuy);
     },
     nextFreeRebirth () {
-      return 45 - moment().diff(moment(this.user.flags.lastFreeRebirth), 'days');
+      return 45 - dayjs().diff(dayjs(this.user.flags.lastFreeRebirth), 'days');
     },
     nonSubscriberHourglasses () {
       return (!this.user.purchased.plan.customerId && !this.user.purchased.plan.consecutive.trinkets && this.getPriceClass() === 'hourglasses');
     },
     endDate () {
-      return moment(this.item.event.end);
+      return dayjs(this.item.event.end);
     },
     totalOwned () {
       return this.user.items[this.item.purchaseType][this.item.key] || 0;

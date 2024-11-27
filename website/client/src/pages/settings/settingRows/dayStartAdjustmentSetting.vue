@@ -94,7 +94,7 @@
 
 <script>
 import axios from 'axios';
-import moment from 'moment/moment';
+import dayjs from 'dayjs';
 import getUtcOffset from '@/../../common/script/fns/getUtcOffset';
 import { mapState } from '@/libs/store';
 
@@ -136,7 +136,7 @@ export default {
       user: 'user.data',
     }),
     timezoneOffsetToUtc () {
-      const offsetString = moment().utcOffset(getUtcOffset(this.user)).format('Z');
+      const offsetString = dayjs().utcOffset(getUtcOffset(this.user)).format('Z');
       return `UTC${offsetString}`;
     },
     dayStart () {
@@ -163,13 +163,13 @@ export default {
       return this.dayStartOptions.find(l => l.value === dayStartValue)?.name ?? '';
     },
     calculateNextCron () {
-      let nextCron = moment()
+      let nextCron = dayjs()
         .hours(this.newDayStart)
         .minutes(0)
         .seconds(0)
         .milliseconds(0);
 
-      const currentHour = moment().format('H');
+      const currentHour = dayjs().format('H');
       if (currentHour >= this.newDayStart) {
         nextCron = nextCron.add(1, 'day');
       }
