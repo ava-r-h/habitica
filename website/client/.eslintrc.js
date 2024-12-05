@@ -38,6 +38,7 @@ module.exports = {
     'vue/component-tags-order': ['warn', {
       order: ['template', 'style', 'script'],
     }],
+    'space-before-function-paren': 'off',
   },
   parserOptions: {
     parser: 'babel-eslint',

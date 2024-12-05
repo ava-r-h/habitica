@@ -244,7 +244,7 @@
             <div
               v-if="task.type === 'todo' && task.date"
               class="d-flex align-items-center"
-              :class="{'due-overdue': checkIfOverdue() }"
+              :class="{'due-overdue': isOverdue() }"
             >
               <div
                 v-b-tooltip.hover.bottom="$t('dueDate')"
@@ -911,7 +911,7 @@
 <!-- eslint-enable max-len -->
 <!-- eslint-disable-next-line vue/component-tags-order -->
 <script>
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { v4 as uuid } from 'uuid';
 import isEmpty from 'lodash/isEmpty';
 import { mapState, mapGetters, mapActions } from '@/libs/store';
@@ -1129,20 +1129,19 @@ export default {
       item.completed = !item.completed; // @TODO this should go into the action?
       this.scoreChecklistItem({ taskId: this.task._id, itemId: item.id });
     },
-    calculateTimeTillDue () {
-      const endOfToday = moment().subtract(this.user.preferences.dayStart, 'hours').endOf('day');
-      const endOfDueDate = moment(this.task.date).endOf('day');
-
-      return moment.duration(endOfDueDate.diff(endOfToday));
-    },
-    checkIfOverdue () {
-      return this.calculateTimeTillDue().asDays() < 0;
+    isOverdue () {
+      const dueDate = dayjs(this.task.date);
+      const diff = dueDate.endOf('day').diff(dayjs());
+      const overdue = diff < 0;
+      return overdue;
     },
     formatDueDate () {
-      if (moment().isSame(this.task.date, 'day')) {
+      if (dayjs().isSame(this.task.date, 'day')) {
         return this.$t('today');
       }
-      return moment(this.task.date).format(this.user.preferences.dateFormat.toUpperCase());
+      const dateFormat = this.user.preferences.dateFormat.toUpperCase();
+      const formatted = dayjs(this.task.date).format(dateFormat);
+      return formatted;
     },
     edit (e, task) {
       if (this.isRunningYesterdailies) return;
