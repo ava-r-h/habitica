@@ -21,6 +21,7 @@
 import moment from 'moment';
 import BaseNotification from './base';
 
+
 export default {
   components: {
     BaseNotification,
@@ -28,7 +29,7 @@ export default {
   props: ['notification', 'canRemove'],
   computed: {
     mysteryClass () {
-      return `notif_inventory_present_${moment().format('MM')}`;
+      return `notif_inventory_present_${formatDateWithoutLocale(Date.now(), 'MM');}`;
     },
   },
   methods: {
