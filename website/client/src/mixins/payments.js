@@ -1,11 +1,11 @@
 import axios from 'axios'; // eslint-disable-line no-process-env
 import pick from 'lodash/pick';
-import moment from 'moment';
 import subscriptionBlocks from '@/../../common/script/content/subscriptionBlocks';
 import { mapState } from '@/libs/store';
 import encodeParams from '@/libs/encodeParams';
 import notificationsMixin from '@/mixins/notifications';
 import { CONSTANTS, setLocalSetting } from '@/libs/userlocalManager';
+import { addMoths, formatDateWithoutLocale }  from '@/libs/date'
 
 const STRIPE_PUB_KEY = process.env.STRIPE_PUB_KEY;
 
@@ -35,11 +35,12 @@ export default {
       if (!this.user.preferences || !this.user.preferences.dateFormat) {
         return this.user.purchased.plan.dateTerminated;
       }
-      return moment(this.user.purchased.plan.dateTerminated)
-        .format(this.user.preferences.dateFormat.toUpperCase());
+      /*return moment(this.user.purchased.plan.dateTerminated)
+        .format(this.user.preferences.dateFormat.toUpperCase());*/
+      return formatDateWithoutLocale(this.user.purchased.plan.dateTerminated, this.user.preferences.dateFormat.toUpperCase())
     },
     renewalDate () {
-      const renewalDate = moment().add(1, 'months');
+      const renewalDate = addMoths(Date.now(), 1);
       if (!this.user.preferences || !this.user.preferences.dateFormat) {
         return renewalDate;
       }

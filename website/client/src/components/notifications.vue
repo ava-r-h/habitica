@@ -115,6 +115,7 @@ import notifications from '@/mixins/notifications';
 import guide from '@/mixins/guide';
 import { CONSTANTS, setLocalSetting } from '@/libs/userlocalManager';
 import * as Analytics from '@/libs/analytics';
+import { formatDateWithoutLocale }  from '@/libs/date'
 
 import yesterdailyModal from './tasks/yesterdailyModal';
 import newStuff from './news/modal';
@@ -586,7 +587,8 @@ export default {
       let nextCron = moment().hours(dayStart).minutes(0).seconds(0)
         .milliseconds(0);
 
-      const currentHour = moment().format('H');
+      const currentHour = formatDateWithoutLocale(Date.now(), 'H');
+
       if (currentHour >= dayStart) {
         nextCron = nextCron.add(1, 'day');
       }
